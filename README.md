@@ -1,2 +1,1 @@
-# Pharmacy_management
-Pharmacy_management_system
+My stage_project
