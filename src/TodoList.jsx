@@ -1,45 +1,49 @@
 import { useState } from "react";
 
 function TodoList() {
-  
   const [tasks, setTasks] = useState([]);
-   
   const [newTask, setNewTask] = useState("");
-  
+
   const handleInputChange = (e) => {
     setNewTask(e.target.value);
   };
 
   const addTask = () => {
-    if (newTask.trim() === "") return; 
-    setTasks([...tasks, newTask]);  
-    setNewTask("");  
+    if (newTask.trim() === "") return;
+    setTasks([...tasks, newTask]);
+    setNewTask("");
   };
-  
+
   const deleteTask = (task) => {
-    setTasks(tasks.filter((t) => t !== task)); 
+    const isConfirmed = window.confirm("Are you sure you want to delete this task?");
+    if (isConfirmed) {
+      setTasks(tasks.filter((t) => t !== task));
+    }
   };
 
   return (
-    <div className="flex w-full justify-between p-5">
-      
-      <div className="flex flex-col w-[50%] h-[190px] bg-gray-200 p-4 rounded-lg shadow-lg">
+    <div className="flex flex-col w-full justify-between p-5 items-center">
+      <div className="flex flex-col w-[300px] h-[190px] bg-gray-200 p-4 rounded-lg shadow-lg">
         <h2 className="text-center font-bold text-xl mb-4">Add New Task</h2>
-        <input type="text" className="p-2 rounded mb-2 border border-gray-400" placeholder="Enter a task" value={newTask} onChange={handleInputChange} />
-
+        <input
+          type="text"
+          className="p-2 rounded mb-2 border border-gray-400"
+          placeholder="Enter a task Name"
+          value={newTask}
+          onChange={handleInputChange}
+        />
         <button
           onClick={addTask}
-          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700 cursor-pointer"
+          className="bg-[forestgreen] text-white p-2 rounded hover:bg-blue-700 cursor-pointer"
         >
           Save
         </button>
       </div>
 
-      
-      <div className="flex-1 w-[100%] ml-5 bg-gray-100 p-5 rounded-lg shadow-lg">
+      <div className="flex-1 w-[800px] mt-6 bg-gray-100 p-5 rounded-lg shadow-lg">
         <h2 className="text-center font-bold text-xl mb-4">To-Do List</h2>
         <table className="w-full bg-white shadow-lg rounded-lg">
-          <thead className="bg-blue-500">
+          <thead className="bg-green-500">
             <tr>
               <th className="p-2">No</th>
               <th className="p-2">Task</th>
